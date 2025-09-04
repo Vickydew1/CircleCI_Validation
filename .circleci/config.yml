@@ -4,10 +4,14 @@ orbs:
   accuknox-scan: accuknox/scan@1.0.1
 
 workflows:
-  accuknox:
+  accuknox-sast:
     jobs:
       - accuknox-scan/sast:
-          context: Vicky
-          SOFT_FAIL: false
+          context: accuknox-context
+          LANGUAGE: "python"
+          SEVERITY_THRESHOLD: "Medium"
+          SOFT_FAIL: true
+          REPOSITORY_URL: "https://github.com/Vickydew1/CircleCI_Validation"
+
 
 
