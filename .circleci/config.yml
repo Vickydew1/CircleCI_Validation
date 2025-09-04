@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   sast:
     docker:
-      - image: cimg/base:stable
+      - image: ubuntu:25.10
     steps:
       - checkout
       - setup_remote_docker
