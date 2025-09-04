@@ -7,11 +7,9 @@ workflows:
   accuknox-sast:
     jobs:
       - accuknox-scan/sast:
-          context: accuknox-context
-          LANGUAGE: "python"
+          context: Vicky
           SEVERITY_THRESHOLD: "Medium"
           SOFT_FAIL: true
-          REPOSITORY_URL: "https://github.com/Vickydew1/CircleCI_Validation"
-
+          
 
 
