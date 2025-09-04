@@ -1,11 +1,36 @@
 version: 2.1
 
-orbs:
-  accuknox-scan: accuknox/scan@1.0.1
+jobs:
+  sast:
+    docker:
+      - image: ubuntu-2404:current
+    steps:
+      - checkout
+      - run:
+          name: Build Docker Image
+          command: |
+            export ACCUKNOX_TENANT=3731
+            export ACCUKNOX_LABEL=ROOTFS
+            export ACCUKNOX_ENDPOINT=cspm.demo.accuknox.com
+            export ACCUKNOX_TOKEN=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU4ODEwNDMzLCJqdGkiOiI0YmY3NmEzOTg4MzE0MDVmODE1ZWJjZWMzMDEyMDRiZCIsImlzcyI6ImNzcG0uZGVtby5hY2N1a25veC5jb20ifQ.FOnzDcVr90exLqm227wDQaIo-CYvMWGkLPOKpf2rYGJzgsHqzkUlyVCJaO_AftsNR5Yd7iIwJ5waEoXzhN8Aa9ljFELMV2NILFXR-gd3IKQBsxhUV8h0BjQVE00epayah0nz_nO6u4Y-zrXmLeRvE3rtlz4fHV4Ys0nqRRegjQyWUzSZHkC2ig46GnVZnTazn846mLYbFnDyo7KoMbJSK9dFeDrablrDxygklbYMGrEH_4RFXSJADM9dVH0tIAuRmqPkG0Y92QWgfBaHjS4zoeZCeQcWYrghx3t3voD5lP2NDvkl2x9iD8q8CGxqdLgnRuSTxLwaA8Yip3txGBlXmQ
 
-workflows:
+            export PIPELINE_ID="${PIPELINE_ID:-$CIRCLE_BUILD_NUM}"
+            export JOB_URL="${JOB_URL:-$CIRCLE_BUILD_URL}"
+            if [ -n "$CIRCLE_REPOSITORY_URL" ]; then
+              REPOSITORY_URL_ARG="--repo-url $CIRCLE_REPOSITORY_URL"
+            fi
+
+            echo $REPOSITORY_URL_ARG
+            export DEBUG=TRUE
+
+            curl -L https://github.com/accuknox/aspm-scanner-cli/releases/download/v0.8.6/accuknox-aspm-scanner_linux_x86_64 -o accuknox-aspm-scanner
+            chmod +x accuknox-aspm-scanner
+
+            echo ./accuknox-aspm-scanner scan sast --pipeline-id "$PIPELINE_ID" --job-url "$JOB_URL" $REPOSITORY_URL_ARG --commit-ref $CIRCLE_BRANCH --commit-sha $CIRCLE_SHA1
+            ./accuknox-aspm-scanner scan sast --pipeline-id "$PIPELINE_ID" --job-url "$JOB_URL" $REPOSITORY_URL_ARG --commit-ref $CIRCLE_BRANCH --commit-sha $CIRCLE_SHA1
+
+workflows:  
   accuknox:
     jobs:
-      - accuknox-scan/sast:
-          SOFT_FAIL: true
+    - sast
           
