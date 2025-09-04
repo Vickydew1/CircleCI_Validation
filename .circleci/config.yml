@@ -22,6 +22,7 @@ jobs:
             fi
 
             echo $REPOSITORY_URL_ARG
+            echo test=$REPOSITORY_URL_ARG
             export DEBUG=TRUE
             export DEBIAN_FRONTEND=noninteractive
             apt update -y
