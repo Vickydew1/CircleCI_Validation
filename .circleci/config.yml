@@ -29,8 +29,8 @@ jobs:
             curl -L https://github.com/accuknox/aspm-scanner-cli/releases/download/v0.8.6/accuknox-aspm-scanner_linux_x86_64 -o accuknox-aspm-scanner
             chmod +x accuknox-aspm-scanner
 
-            echo ./accuknox-aspm-scanner scan sast --pipeline-id "$PIPELINE_ID" --job-url "$JOB_URL" $REPOSITORY_URL_ARG --commit-ref $CIRCLE_BRANCH --commit-sha $CIRCLE_SHA1
-            ./accuknox-aspm-scanner scan sast --pipeline-id "$PIPELINE_ID" --job-url "$JOB_URL" $REPOSITORY_URL_ARG --commit-ref $CIRCLE_BRANCH --commit-sha $CIRCLE_SHA1
+            echo ./accuknox-aspm-scanner scan sast
+            ./accuknox-aspm-scanner scan sast 
 
 workflows:  
   accuknox:
