@@ -7,8 +7,7 @@ workflows:
   accuknox:
     jobs:
       - accuknox-scan/iac:
-          context: Vicky
+          context: Demo
           FRAMEWORK: "terraform"
           DIRECTORY: "."
           SOFT_FAIL: true
-          
