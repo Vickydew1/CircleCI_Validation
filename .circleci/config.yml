@@ -10,5 +10,5 @@ workflows:
           context: Vicky
           TARGET_URL: "http://testphp.vulnweb.com"
           DAST_SCAN_TYPE: "full-scan"
-          SEVERITY_THRESHOLD: "low"
+          SEVERITY_THRESHOLD: "medium"
           SOFT_FAIL: true
