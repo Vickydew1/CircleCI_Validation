@@ -6,10 +6,9 @@ orbs:
 workflows:
   accuknox:
     jobs:
-      - accuknox-scan/iac:
+      - accuknox-scan/dast:
           context: Demo
-          FRAMEWORK: "terraform"
-          DIRECTORY: "."
+          TARGET_URL: "http://testphp.vulnweb.com"
+          DAST_SCAN_TYPE: "baseline"
+          SEVERITY_THRESHOLD: "High"
           SOFT_FAIL: true
-
-
