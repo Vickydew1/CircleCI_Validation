@@ -8,3 +8,6 @@ def insecure_md5(data: str) -> str:
 
 if __name__ == "__main__":
     print("MD5 of test:", insecure_md5("accuknox"))
+
+
+
