@@ -8,7 +8,6 @@ workflows:
     jobs:
       - accuknox-scan/sast:
           context: Vicky
-          SEVERITY_THRESHOLD: "Medium"
           SOFT_FAIL: false
           
 
