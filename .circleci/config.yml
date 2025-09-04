@@ -3,6 +3,13 @@ version: 2.1
 orbs:
   accuknox-scan: accuknox/scan@1.0.1
 
+env:
+  variables:
+    SOFT_FAIL: "true"
+    IMAGE: "gitlab"
+    IMAGE_TAG: "test"
+    IMAGE_TAR: "image.tar"
+    
 workflows:
   accuknox:
     jobs:
