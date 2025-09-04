@@ -1,17 +1,11 @@
 version: 2.1
 
 orbs:
-  accuknox-scan: accuknox/scan@1.0.1
+  accuknox-scan: accuknox/scan@1.0.0
 
 workflows:
   accuknox:
     jobs:
-      - accuknox-scan/dast:
-          context: Vicky
-          TARGET_URL: "http://testphp.vulnweb.com"
-          DAST_SCAN_TYPE: "full-scan"
-          SEVERITY_THRESHOLD: "medium"
-          SOFT_FAIL: true
       - accuknox-scan/sast:
           context: Vicky
-          SOFT_FAIL: true
+          SOFT_FAIL: false
