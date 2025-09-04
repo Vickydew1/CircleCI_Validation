@@ -1,16 +1,13 @@
 version: 2.1
 
 orbs:
-  accuknox-scan: accuknox/scan@1.0.1
+  accuknox-scan: accuknox/scan@1.0.0
 
 workflows:
-  accuknox-sast:
+  accuknox:
     jobs:
-      - accuknox-scan/sast:
+      - accuknox-scan/iac:
           context: Vicky
-          SOFT_FAIL: false
-          
-
-
-
-
+          FRAMEWORK: "terraform"
+          DIRECTORY: "."
+          SOFT_FAIL: true
