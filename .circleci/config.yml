@@ -4,8 +4,10 @@ orbs:
   accuknox-scan: accuknox/scan@1.0.1
 
 workflows:
-  accuknox-sast:
+  accuknox:
     jobs:
-      - accuknox-scan/sast:
-          context: Demo
+      - accuknox-scan/container:
+          context: demo
+          IMAGE_NAME: circleci
+          TAG: test
           SOFT_FAIL: true
