@@ -12,3 +12,4 @@ workflows:
           DAST_SCAN_TYPE: "baseline"
           SEVERITY_THRESHOLD: "High"
           SOFT_FAIL: true
+
