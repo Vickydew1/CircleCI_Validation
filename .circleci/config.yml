@@ -9,7 +9,7 @@ workflows:
       - accuknox-scan/sast:
           context: Vicky
           SEVERITY_THRESHOLD: "Medium"
-          SOFT_FAIL: true
+          SOFT_FAIL: false
           
 
 
