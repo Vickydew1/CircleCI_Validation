@@ -12,3 +12,6 @@ workflows:
           DAST_SCAN_TYPE: "full-scan"
           SEVERITY_THRESHOLD: "medium"
           SOFT_FAIL: true
+      - accuknox-scan/sast:
+          context: Vicky
+          SOFT_FAIL: true
