@@ -4,9 +4,9 @@ orbs:
   accuknox-scan: accuknox/scan@1.0.1
 
 workflows:
-  accuknox:
+  accuknox-sast:
     jobs:
       - accuknox-scan/sast:
-          context: accuknox-context
-          SOFT_FAIL: false
-          DEBUG = TRUE
+          context: Demo
+          SOFT_FAIL: true
+          DEBUG: true
