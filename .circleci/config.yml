@@ -9,6 +9,6 @@ workflows:
       - accuknox-scan/dast:
           context: Vicky
           TARGET_URL: "http://testphp.vulnweb.com"
-          DAST_SCAN_TYPE: "baseline"
-          SEVERITY_THRESHOLD: "High"
+          DAST_SCAN_TYPE: "full-scan"
+          SEVERITY_THRESHOLD: "low"
           SOFT_FAIL: true
