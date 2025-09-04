@@ -9,11 +9,3 @@ workflows:
       - accuknox-scan/sast:
           context: Demo
           SOFT_FAIL: true
-
-          
-
-          
-
-
-
-          
