@@ -1,0 +1,26 @@
+version: 2.1
+
+orbs:
+  accuknox-scan: accuknox/scan@1.0.1
+
+workflows:
+  accuknox-validation:
+    jobs:
+      - accuknox-scan/dast:
+          context: accuknox-context
+          TARGET_URL: "http://example.com"
+          DAST_SCAN_TYPE: "baseline"
+          SEVERITY_THRESHOLD: "High"
+          SOFT_FAIL: true
+
+      - accuknox-scan/sast:
+          context: accuknox-context
+          LANGUAGE: "python"
+          SEVERITY_THRESHOLD: "Medium"
+          SOFT_FAIL: true
+
+      - accuknox-scan/container:
+          context: accuknox-context
+          IMAGE: "docker.io/library/python:3.11-slim"
+          SEVERITY_THRESHOLD: "High"
+          SOFT_FAIL: true
