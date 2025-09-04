@@ -8,7 +8,7 @@ workflows:
     jobs:
       - accuknox-scan/dast:
           context: Vicky
-          TARGET_URL: "[http://testphp.vulnweb.com](http://testphp.vulnweb.com)"
+          TARGET_URL: "http://testphp.vulnweb.com"
           DAST_SCAN_TYPE: "baseline"
           SEVERITY_THRESHOLD: "High"
           SOFT_FAIL: true
