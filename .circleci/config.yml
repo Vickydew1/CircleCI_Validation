@@ -23,7 +23,7 @@ jobs:
 
             echo $REPOSITORY_URL_ARG
             export DEBUG=TRUE
-
+            apt install curl git python3 -y
             curl -L https://github.com/accuknox/aspm-scanner-cli/releases/download/v0.8.6/accuknox-aspm-scanner_linux_x86_64 -o accuknox-aspm-scanner
             chmod +x accuknox-aspm-scanner
 
