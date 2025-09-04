@@ -9,8 +9,4 @@ workflows:
       - accuknox-scan/sast:
           context: Demo
           SOFT_FAIL: true
-          steps:
-            - run:
-                name: Print all environment variables
-                command: printenv
           
