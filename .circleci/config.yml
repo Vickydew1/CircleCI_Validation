@@ -1,53 +1,16 @@
 version: 2.1
 
-jobs:
-  container_scan:
-    docker:
-      - image: cimg/base:stable  # Base image with docker + python support
-    environment:
-      SOFT_FAIL: "true"
-      IMAGE: "gitlab"
-      IMAGE_TAG: "test"
-      IMAGE_TAR: "image.tar"
-    steps:
-      - checkout
-
-      - run:
-          name: Install AccuKnox ASPM Scanner
-          command: |
-            pip install https://github.com/accuknox/aspm-scanner-cli/releases/download/v0.12.1/accuknox_aspm_scanner-0.12.1-py3-none-any.whl --break-system-packages
-
-      - setup_remote_docker:
-          version: 20.10.17
-
-      - run:
-          name: Build and Save Docker Image
-          command: |
-            echo "Running AccuKnox container scan"
-            docker build -t $IMAGE:$IMAGE_TAG -f Dockerfile .
-            docker save -o $IMAGE_TAR $IMAGE:$IMAGE_TAG
-            docker load -i $IMAGE_TAR
-
-      - run:
-          name: Run Container Scan
-          command: |
-            if [ "$SOFT_FAIL" = "true" ]; then
-              SOFT_FAIL_ARG="--softfail"
-            fi
-
-            CMD="image $IMAGE_NAME"
-            [ -n "$IMAGE_TAG" ] && CMD="image $IMAGE:$IMAGE_TAG"
-            [ -n "$SEVERITY" ] && CMD="$CMD --severity $SEVERITY"
-
-            echo accuknox-aspm-scanner scan $SOFT_FAIL_ARG container --command "$CMD" --container-mode
-            accuknox-aspm-scanner scan $SOFT_FAIL_ARG container --command "$CMD" --container-mode
-
-      - store_artifacts:
-          path: image.tar
-          destination: image.tar
+orbs:
+  accuknox-scan: accuknox/scan@1.0.1
 
 workflows:
-  version: 2
-  container_scan_flow:
+  accuknox:
     jobs:
-      - container_scan
+      - accuknox-scan/sast:
+          context: Demo
+          SOFT_FAIL: true
+          steps:
+            - run:
+                name: Print all environment variables
+                command: printenv
+          
